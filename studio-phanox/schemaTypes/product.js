@@ -1,6 +1,6 @@
 import {defineType, defineField} from 'sanity'
 
-export const product =  defineType({
+export const product = defineType({
   name: 'product',
   title: 'Product',
   type: 'document',
@@ -37,6 +37,29 @@ export const product =  defineType({
       name: 'details',
       title: 'Details',
       type: 'string',
+    },
+    {
+      name: 'reviews',
+      title: 'Reviews',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'user',
+              type: 'string',
+              title: 'User',
+            }),
+            defineField({
+              name: 'rating',
+              type: 'number',
+              title: 'Rating',
+              validation: (Rule) => Rule.min(1).max(5),
+            }),
+          ],
+        },
+      ],
     },
   ],
 })
